@@ -120,7 +120,7 @@ var ChoosedView = Parse.View.extend({
         var compiler = templates['lesson'];
         _.each(choosed.models,function(_model){
             var html = compiler({model : _model });
-            $el.append(html);
+            $list.append(html);
         })
     }
 })
