@@ -64,7 +64,7 @@ var lessons = new Lessons([{
 
 var choosed = new Lessons();
 
-
+// View Class
 var LessonsView = Parse.View.extend({
     el:"#lessonList",
     events: {
@@ -112,8 +112,6 @@ var LessonsView = Parse.View.extend({
     }
 })
 
-
-
 var ChoosedView = Parse.View.extend({
     el:"#lessonList",
     render:function(){
@@ -122,13 +120,26 @@ var ChoosedView = Parse.View.extend({
         var compiler = templates['lesson'];
         _.each(choosed.models,function(_model){
             var html = compiler({model : _model });
-            $list.append(html);
+            $el.append(html);
         })
     }
 })
 
+var AboutView = Parse.View.extend({
+    el:"#lessonList",
+    render:function(){
+        this.$el.html('<li class="card"><h3>About</h3><p>一天完成的《多媒体交互设计二》结课作业而已。作业要求是一个「选中三门课才可提交」的选课系统。使用了 Parse 作为数据后端，使用 Backbone.js 完成前端 MVC 逻辑。主要尝试了在 Mobile-Web 中实现 Navigation Drawer 和部分 Material Design 。</p><br><p>作者：<a href="http://huxpro.github.io">黄玄</a></p></li>');
+
+    }
+})
+
+
+
+
+// Business Logic
 var lessonsView;
 var choosedView;
+var aboutView;
 
 //button
 $(".my_btn").click(function(){
@@ -136,6 +147,9 @@ $(".my_btn").click(function(){
 })
 $(".all_btn").click(function(){
     lessonsView.render();
+})
+$(".about_btn").click(function(){
+    aboutView.render();
 })
 $submit.click(function(){
     //generate Data
@@ -183,6 +197,7 @@ function logIn(e){
         //new View
         lessonsView = new LessonsView();
         choosedView = new ChoosedView();
+        aboutView = new AboutView();
 
         //disappear Welcome Page
         $welcome.css({
