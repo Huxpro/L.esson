@@ -7,6 +7,7 @@
 body{
 	background: #E5E5E5;
 	height: 100%;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 #lessonList {
@@ -71,9 +72,17 @@ body{
 	box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
 	background-color: rgb(238,255,68);
 	color: rgb(119,127,32);
-	line-height: 56px;
-	font-size: 24px;
+	line-height: 52px;
+	font-size: 26px;
 	text-align: center;
+}
+.FAB:active{
+	/*background-color: rgb(219, 234, 71);*/
+	box-shadow: 0px 5px 10px 2px rgba(0,0,0,.20);
+}
+.FAB:hover{
+	/*background-color: rgb(219, 234, 71);*/
+	box-shadow: 0px 5px 10px 2px rgba(0,0,0,.20);
 }
 
 #welcome{
@@ -157,9 +166,11 @@ body{
 	}
 }
 @media all and (max-width: 720px) {
+	body{
+		background-color: white;
+	}
 	main{
    		padding: 0px;
-
 	}
 	#lessonList {
 		padding-top: 58px;
