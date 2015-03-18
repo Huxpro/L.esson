@@ -107,6 +107,7 @@ body{
     margin: 0 auto;
     margin-top: 120px;
     border: 0px;
+    border-radius: 0px;
     border-bottom: 1px solid rgb(149, 149, 213);
     padding: 10px 0;
     color: rgb(149, 149, 213);
@@ -130,6 +131,10 @@ body{
     padding: 20px 40px;
     font-family: inherit;
     letter-spacing: 3px;
+    border-radius: 0px 0px 2px 2px;
+}
+#welcome button:active{
+	background-color: rgb(129, 129, 186);
 }
 
 #welcome p{

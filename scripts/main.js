@@ -37,10 +37,11 @@ var Lessons = Parse.Collection.extend({
 var lessons = new Lessons([{
     name:"Front-End",
     teacher:"WangyeZhao",
-    room:"Anima201"
+    room:"Anima201",
+    credit: 4
 }, {
     name:"UX Design",
-    teacher:"Someone"
+    teacher:"TestTeacher"
 }, {
     name : 'TestLesson1'
 }, {
@@ -147,7 +148,7 @@ $submit.click(function(){
     currentUser.set("choosed",choosedData);
     currentUser.save(null,{
         success:function(user){
-            alert("提交成功！");
+            alert("选课提交成功！");
         },
         error:function(user,error){
             alert("服务器正在选课……");
@@ -159,13 +160,19 @@ $submit.click(function(){
 // logIn form
 var logIn_btn = $("#login button");
 var logIn_input = $('#login input');
+var logIn_text = $('#login p');
 logIn_btn.on('click', logIn);
 
 function logIn(e){
+    var self = this;
 
-
-    e.preventDefault();    //getInput
+    if(e){
+        e.preventDefault();  
+    }
+      
    
+    logIn_text.text("正在登陆中……")
+
     var value = logIn_input.val();
     console.log(value)
 
@@ -187,24 +194,30 @@ function logIn(e){
         console.log(choosedData);
 
         //recover List
-        choosedData.forEach(function(value){
-            _.each(lessons.models,function(_model){
-                if(_model.cid === value){
-                    _model.set('choosed',true);
-                }
+        if(choosedData){   // 如果服务器上存在
+             choosedData.forEach(function(value){
+                _.each(lessons.models,function(_model){
+                    if(_model.cid === value){
+                        _model.set('choosed',true);
+                    }
+                })
             })
-        })
+        }
+       
         lessonsView.refresh();
         lessonsView.render();
 
       },
       error: function(user, error) {
+        logIn_text.text("系统检测到该学号为第一次登陆，正在为您自动注册……")
         signUp();
       }
     });
 
     //SignUp
     function signUp(){
+        var self = this;
+
         var user = new Parse.User();
         user.set("username", value);
         user.set("password", "mypass");
